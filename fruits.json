@@ -1,38 +1,38 @@
 [
     {
         "title": "Pomme",
-        "IdCount": 14,
+        "idCount": 14,
         "Fruit": "Rock",
         "ImportAt": "2021-10-02 00:00:00"
     },
     {
         "title": "Poire",
-        "IdCount": 8,
-        "genre": "Heavy Metal",
+        "idCount": 8,
+        "Fruit": "Heavy Metal",
         "ImportAt": "2022-04-28 00:00:00"
     },
     {
         "title": "Abricot",
-        "IdCount": 10,
-        "genre": "Pop",
+        "idCount": 10,
+        "Fruit": "Pop",
         "ImportAt": "2019-06-20 00:00:00.000000"
     },
     {
         "title": "Framboise",
-        "IdCount": 14,
-        "genre": "Country",
+        "idCount": 14,
+        "Fruit": "Country",
         "ImportAt": "2022-03-13 00:00:00"
     },
     {
         "title": "Fraise",
-        "IdCount": 14,
-        "genre": "Country",
+        "idCount": 14,
+        "Fruit": "Country",
         "ImportAt": "2022-03-13 00:00:00"
     },
     {
         "title": "Banane",
-        "IdCount": 11,
-        "genre": "Alternative Rock",
+        "idCount": 11,
+        "Fruit": "Alternative Rock",
         "ImportAt": "2022-05-01 00:00:00"
     }
 ]
