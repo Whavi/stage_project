@@ -1,0 +1,38 @@
+[
+    {
+        "title": "Pomme",
+        "idCount": 14,
+        "pays": "France",
+        "importAt": "2021-10-02 00:00:00"
+    },
+    {
+        "title": "Poire",
+        "idCount": 8,
+        "pays": "France",
+        "importAt": "2022-04-28 00:00:00"
+    },
+    {
+        "title": "Abricot",
+        "idCount": 10,
+        "pays": "Espagne",
+        "importAt": "2019-06-20 00:00:00.000000"
+    },
+    {
+        "title": "Framboise",
+        "idCount": 14,
+        "pays": "Comlombie",
+        "importAt": "2022-03-13 00:00:00"
+    },
+    {
+        "title": "Fraise",
+        "idCount": 14,
+        "pays": "Espagne",
+        "importAt": "2022-03-13 00:00:00"
+    },
+    {
+        "title": "Banane",
+        "idCount": 11,
+        "pays": "Comlombie",
+        "importAt": "2022-05-01 00:00:00"
+    }
+]
