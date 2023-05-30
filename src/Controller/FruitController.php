@@ -54,8 +54,6 @@ class FruitController extends AbstractController
             
         ]);
     }
-
-        
     
 }
 
