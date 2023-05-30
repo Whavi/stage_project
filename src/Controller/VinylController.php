@@ -1,7 +1,8 @@
 <?php
 namespace App\Controller;
 
-use App\Service\FruitRepository;
+use App\Entity\FruitsMix;
+use App\Repository\FruitsMixRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController; 
 use Symfony\Contracts\Cache\CacheInterface;
 use function Symfony\Component\String\u;
@@ -9,16 +10,15 @@ use Symfony\Contracts\HttpClient\HttpClientInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Psr\Log\LoggerInterface;
+use Doctrine\ORM\EntityManagerInterface;
+
 class VinylController extends AbstractController
 {
 
     public function __construct(
-        private bool $isDebug,
-        private FruitRepository $FruitRepository)
+        private bool $isDebug,)
     {
         $this->isDebug = $isDebug;
-        $this->FruitRepository = $FruitRepository;
-
     }
 
 
@@ -90,11 +90,12 @@ class VinylController extends AbstractController
 
 
     #[Route('/fruit/{slug}', name:'app_page')]
-    public function fruit(HttpClientInterface $httpClient, CacheInterface $cache, string $slug = null): Response
+    public function fruit(HttpClientInterface $httpClient, CacheInterface $cache,FruitsMixRepository $FruitRepository ,EntityManagerInterface $entityManager , string $slug = null): Response
     {
         $title = $slug ? u(str_replace('-', ' ', $slug))->title(true) : null;
-        $fruits = $this->FruitRepository->findAll();
 
+        $fruits = $FruitRepository->findAll();
+        
 
         return $this->render('fruit.html.twig',[
             'title' => $title,
