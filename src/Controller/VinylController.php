@@ -85,16 +85,12 @@ class VinylController extends AbstractController
 
 
 
-
-
-
-
     #[Route('/fruit/{slug}', name:'app_page')]
     public function fruit(HttpClientInterface $httpClient, CacheInterface $cache,FruitsMixRepository $FruitRepository ,EntityManagerInterface $entityManager , string $slug = null): Response
     {
         $title = $slug ? u(str_replace('-', ' ', $slug))->title(true) : null;
 
-        $fruits = $FruitRepository->findBy([], ['votes' => 'DESC']);
+        $fruits = $FruitRepository->findAllOrderedByVotes();
         
 
         return $this->render('fruit.html.twig',[
@@ -104,6 +100,17 @@ class VinylController extends AbstractController
         
     }
 
+
+
+    #[Route('/fruits/{id}', name:'app_show_id')]
+    public function show($id, FruitsMixRepository $FruitRepository) 
+    { 
+        $frt = $FruitRepository->find($id);
+        return $this->render('index.html.twig', [
+            'mix' => $frt,
+            
+        ]);
+    }
 
 
 

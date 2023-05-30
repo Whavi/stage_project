@@ -14,9 +14,15 @@ class FruitController extends AbstractController
     public function new(EntityManagerInterface $entityManager): Response
     {
         $fruit = new FruitsMix();
-        $fruit->setTitle('Pomme');
+
+        $fruits =["pomme", "poire", "pastèque"];
+        $fruit->setTitle($fruits[array_rand($fruits)]);
+
         $fruit->setDescription('Un fruit juteux et sucré dans une bonne saison');
-        $fruit->setPays('Espagne');
+
+        $pays =["France", "Espagne", "Portugal"];
+        $fruit->setPays($pays[array_rand($pays)]);
+
         $fruit->setImportAt(new \DateTimeImmutable());
         $fruit->setIdCount(rand(5, 20));
         $fruit->setVotes(rand(-50, 50));
@@ -25,7 +31,7 @@ class FruitController extends AbstractController
         
 
         return new Response(sprintf(
-            'Le fruit %d est %d venu d\'un autre pays que l\'espagne',
+            'Le fruit %d est %d venu d\'un autre pays comme ce pays.',
             $fruit->getId(),
             $fruit->getIdCount()
     ));

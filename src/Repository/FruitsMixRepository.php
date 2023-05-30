@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\FruitsMix;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -39,6 +40,27 @@ class FruitsMixRepository extends ServiceEntityRepository
         }
     }
 
+    public function findAllOrderedByVotes(string $title = null): array
+    {
+
+        $queryBuilder = $this->addOrderByVotesQueryBuilder();
+
+        if ($title) {
+            $queryBuilder->andWhere('mix.title = :title')
+                ->setParameter('title', $title);
+        }
+
+        return $queryBuilder
+        ->getQuery()
+        ->getResult()
+        ;
+    }
+
+    private function addOrderByVotesQueryBuilder(QueryBuilder $queryBuilder = null): QueryBuilder
+    {
+        $queryBuilder = $queryBuilder ?? $this->createQueryBuilder('mix');
+        return $queryBuilder->orderBy('mix.votes', 'DESC');
+    }
 //    /**
 //     * @return FruitsMix[] Returns an array of FruitsMix objects
 //     */
@@ -63,4 +85,5 @@ class FruitsMixRepository extends ServiceEntityRepository
 //            ->getOneOrNullResult()
 //        ;
 //    }
+
 }
