@@ -1,7 +1,7 @@
 <?php
 namespace App\Controller;
 
-use App\Entity\FruitsMix;
+
 use App\Repository\FruitsMixRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController; 
 use Symfony\Contracts\Cache\CacheInterface;
@@ -94,7 +94,7 @@ class VinylController extends AbstractController
     {
         $title = $slug ? u(str_replace('-', ' ', $slug))->title(true) : null;
 
-        $fruits = $FruitRepository->findAll();
+        $fruits = $FruitRepository->findBy([], ['votes' => 'DESC']);
         
 
         return $this->render('fruit.html.twig',[
