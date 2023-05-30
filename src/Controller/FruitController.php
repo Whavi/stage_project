@@ -15,7 +15,7 @@ class FruitController extends AbstractController
     {
         $fruit = new FruitsMix();
 
-        $fruits =["pomme", "poire", "pastèque"];
+        $fruits =["Pomme", "Poire", "Pastèque"];
         $fruit->setTitle($fruits[array_rand($fruits)]);
 
         $fruit->setDescription('Un fruit juteux et sucré dans une bonne saison');
