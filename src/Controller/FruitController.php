@@ -6,6 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Doctrine\ORM\EntityManagerInterface;
+use App\Repository\FruitsMixRepository;
 
 
 class FruitController extends AbstractController
@@ -23,6 +24,8 @@ class FruitController extends AbstractController
         $pays =["France", "Espagne", "Portugal"];
         $fruit->setPays($pays[array_rand($pays)]);
 
+
+
         $fruit->setImportAt(new \DateTimeImmutable());
         $fruit->setIdCount(rand(5, 20));
         $fruit->setVotes(rand(-50, 50));
@@ -35,8 +38,22 @@ class FruitController extends AbstractController
             $fruit->getId(),
             $fruit->getIdCount()
     ));
+}
+    
+    #[Route('/fruitsShoot/{id}', name:'app_show_id')]
+        public function show($id, FruitsMixRepository $FruitRepository): Response 
+    { 
+        $frt = $FruitRepository->find($id);
+
+       
+
+        return $this->render('frt/show.html.twig', [
+            'mix' => $frt,
+            
+        ]);
+    }
 
         
-    }
+    
 }
 

@@ -102,20 +102,6 @@ class VinylController extends AbstractController
 
 
 
-    #[Route('/fruits/{id}', name:'app_show_id')]
-    public function show($id, FruitsMixRepository $FruitRepository): Response 
-    { 
-        $frt = $FruitRepository->find($id);
-
-        return $this->render('frt/show.html.twig', [
-            'mix' => $frt,
-
-            'id' => $id,
-            
-            
-        ]);
-    }
-
 
 
 
