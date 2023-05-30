@@ -27,14 +27,14 @@
         <div class="row">
             {% for mix in mixes %}
                 <div class="col col-md-4">
-                <a href="{{ path('app_show_id', {id: mix.id}) }} ">
+                <a href="{{ path('app_show_id', {id: mix.id}) }} " target="_blank">
 
                     <div class="mixed-vinyl-container p-3 text-center">
 
                         <img src="{{ mix.getImageUrl(300) }}" data-src="{{ mix.getImageUrl(300) }}" alt="Square placeholder img">
 
                         <p class="mt-2"><strong>{{ mix.title }}</strong></p>
-                        
+                </a>
                         <span>{{ mix.idCount }} fruits</span>
                         |
                         <span>{{ mix.pays }}</span>
@@ -42,7 +42,6 @@
                         <br>
                         {{ mix.votesString }} votes
                     </div>
-                </a>
                 </div>
             {% endfor %}
         </div>
