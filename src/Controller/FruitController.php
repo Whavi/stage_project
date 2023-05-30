@@ -45,7 +45,9 @@ class FruitController extends AbstractController
     { 
         $frt = $FruitRepository->find($id);
 
-       
+        if (!$frt) {
+            throw $this->createNotFoundException('Mix not found');
+        }
 
         return $this->render('frt/show.html.twig', [
             'mix' => $frt,
