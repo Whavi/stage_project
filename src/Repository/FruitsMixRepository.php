@@ -40,7 +40,7 @@ class FruitsMixRepository extends ServiceEntityRepository
         }
     }
 
-    public function findAllOrderedByVotes(string $title = null): array
+    public function createOrderedByVotesQueryBuilder(string $title = null): array
     {
 
         $queryBuilder = $this->addOrderByVotesQueryBuilder();

@@ -2,15 +2,14 @@
 namespace App\Controller;
 
 use App\Repository\FruitsMixRepository;
+use Doctrine\ORM\QueryBuilder;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController; 
-use Symfony\Contracts\Cache\CacheInterface;
 use function Symfony\Component\String\u;
-use Symfony\Contracts\HttpClient\HttpClientInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Psr\Log\LoggerInterface;
-use Doctrine\ORM\EntityManagerInterface;
-
+use Pagerfanta\Doctrine\ORM\QueryAdapter;
+use Pagerfanta\Pagerfanta;
 class VinylController extends AbstractController
 {
 
@@ -85,16 +84,22 @@ class VinylController extends AbstractController
 
 
     #[Route('/fruit/{slug}', name:'app_page')]
-    public function fruit(HttpClientInterface $httpClient, CacheInterface $cache,FruitsMixRepository $FruitRepository ,EntityManagerInterface $entityManager, string $slug = null): Response
+    public function fruit(FruitsMixRepository $FruitRepository, string $slug = null): Response
     {
         $title = $slug ? u(str_replace('-', ' ', $slug))->title(true) : null;
 
-        $fruits = $FruitRepository->findAllOrderedByVotes($title);
+        $queryBuilder  = $FruitRepository->createOrderedByVotesQueryBuilder($title);
+        $adapter = new QueryAdapter($queryBuilder);
+        $pagerfanta = Pagerfanta::createForCurrentPageWithMaxPerPage(
+            $adapter,
+            1,
+            9
+        );
         
 
         return $this->render('fruit.html.twig',[
             'title' => $title,
-            'mixes' => $fruits,
+            'pager' => $pagerfanta,
             
         ]);
         

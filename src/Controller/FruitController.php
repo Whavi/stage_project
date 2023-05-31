@@ -12,6 +12,8 @@ use Symfony\Component\HttpFoundation\Request;
 
 class FruitController extends AbstractController
 {
+
+/*    
     #[Route('/fruit/new')]
     public function new(EntityManagerInterface $entityManager): Response
     {
@@ -40,7 +42,7 @@ class FruitController extends AbstractController
             $fruit->getIdCount()
     ));
 }
-    
+*/
     #[Route('/fruitsShoot/{id}', name:'app_show_id')]
         public function show($id, FruitsMixRepository $FruitRepository): Response 
     { 
