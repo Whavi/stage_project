@@ -7,6 +7,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Repository\FruitsMixRepository;
+use Symfony\Component\HttpFoundation\Request;
 
 
 class FruitController extends AbstractController
@@ -54,6 +55,25 @@ class FruitController extends AbstractController
             
         ]);
     }
-    
+
+    #[Route('/fruitsShoot/{id}/vote', name:'app_vote_id', methods: ["POST"])]
+        public function vote(FruitsMix $fruitsMix, Request $request, EntityManagerInterface $entityManager): Response 
+    { 
+        $direction = $request->request->get('direction', 'up');
+        if ($direction === 'up') {
+            $fruitsMix->upVotes();
+        } else {
+            $fruitsMix->downVotes();
+        }
+
+        $entityManager->flush();
+        $this->addFlash('success', 'Vote réussi !');
+
+        return $this->redirectToRoute('app_show_id',[
+            'id' => $fruitsMix->getId(),
+        ]);
+    }
 }
+    
+
 

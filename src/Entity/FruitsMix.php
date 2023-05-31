@@ -110,6 +110,14 @@ class FruitsMix
         return $this;
     }
 
+    public function upVotes(): void{
+        $this->votes++;
+    }
+    
+    public function downVotes(): void{
+        $this->votes--;
+    }
+
     public function getVotesString(): String
     {
         $prefix = ($this->votes === 0) ? '' : (($this->votes >= 0) ? '+' : '-');
@@ -124,5 +132,7 @@ class FruitsMix
             $width
         );
     }
+
+    
 }
 
