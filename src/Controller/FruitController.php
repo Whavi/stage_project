@@ -8,6 +8,9 @@ use Symfony\Component\Routing\Annotation\Route;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Repository\FruitsMixRepository;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Contracts\HttpClient\HttpClientInterface;
+use Symfony\Contracts\Cache\CacheInterface;
+use function Symfony\Component\String\u;
 
 
 class FruitController extends AbstractController
@@ -40,6 +43,22 @@ class FruitController extends AbstractController
             $fruit->getIdCount()
     ));
 }
+
+
+        #[Route('/fruit/{slug}', name:'app_page')]
+        public function fruit(HttpClientInterface $httpClient, CacheInterface $cache,FruitsMixRepository $FruitRepository ,EntityManagerInterface $entityManager, string $slug = null): Response
+        {
+            $title = $slug ? u(str_replace('-', ' ', $slug))->title(true) : null;
+        
+            $fruits = $FruitRepository->findAllOrderedByVotes($title);
+
+        
+            return $this->render('fruit.html.twig',[
+                'title' => $title,
+                'mixes' => $fruits,
+
+            ]);
+        }
     
     #[Route('/fruitsShoot/{id}', name:'app_show_id')]
         public function show($id, FruitsMixRepository $FruitRepository): Response 
