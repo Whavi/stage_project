@@ -2,9 +2,9 @@
 namespace App\Controller;
 
 use App\Repository\FruitsMixRepository;
-use Doctrine\ORM\QueryBuilder;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController; 
 use function Symfony\Component\String\u;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Psr\Log\LoggerInterface;
@@ -84,7 +84,7 @@ class VinylController extends AbstractController
 
 
     #[Route('/fruit/{slug}', name:'app_page')]
-    public function fruit(FruitsMixRepository $FruitRepository, string $slug = null): Response
+    public function fruit(FruitsMixRepository $FruitRepository,Request $request, string $slug = null): Response
     {
         $title = $slug ? u(str_replace('-', ' ', $slug))->title(true) : null;
 
@@ -92,11 +92,10 @@ class VinylController extends AbstractController
         $adapter = new QueryAdapter($queryBuilder);
         $pagerfanta = Pagerfanta::createForCurrentPageWithMaxPerPage(
             $adapter,
-            1,
-            9
+            $request->query->get('page', 1),
+            9,
         );
         
-
         return $this->render('fruit.html.twig',[
             'title' => $title,
             'pager' => $pagerfanta,

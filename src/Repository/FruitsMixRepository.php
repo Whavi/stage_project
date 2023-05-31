@@ -40,7 +40,7 @@ class FruitsMixRepository extends ServiceEntityRepository
         }
     }
 
-    public function createOrderedByVotesQueryBuilder(string $title = null): array
+    public function createOrderedByVotesQueryBuilder(string $title = null): QueryBuilder
     {
 
         $queryBuilder = $this->addOrderByVotesQueryBuilder();
@@ -50,10 +50,7 @@ class FruitsMixRepository extends ServiceEntityRepository
                 ->setParameter('title', $title);
         }
 
-        return $queryBuilder
-        ->getQuery()
-        ->getResult()
-        ;
+        return $queryBuilder;
     }
 
     private function addOrderByVotesQueryBuilder(QueryBuilder $queryBuilder = null): QueryBuilder
