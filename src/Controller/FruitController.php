@@ -67,7 +67,6 @@ class FruitController extends AbstractController
         }
 
         $entityManager->flush();
-        $this->addFlash('success', 'Vote réussi !');
 
         return $this->redirectToRoute('app_show_id',[
             'id' => $fruitsMix->getId(),

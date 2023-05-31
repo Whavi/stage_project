@@ -61,6 +61,8 @@ class FruitsMixRepository extends ServiceEntityRepository
         $queryBuilder = $queryBuilder ?? $this->createQueryBuilder('mix');
         return $queryBuilder->orderBy('mix.votes', 'DESC');
     }
+
+
 //    /**
 //     * @return FruitsMix[] Returns an array of FruitsMix objects
 //     */

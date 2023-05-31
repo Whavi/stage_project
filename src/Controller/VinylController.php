@@ -89,7 +89,8 @@ class VinylController extends AbstractController
     {
         $title = $slug ? u(str_replace('-', ' ', $slug))->title(true) : null;
 
-        $fruits = $FruitRepository->findAllOrderedByVotes();
+        $fruits = $FruitRepository->findAllOrderedByVotes($title);
+        
         
 
         return $this->render('fruit.html.twig',[
