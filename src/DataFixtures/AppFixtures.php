@@ -3,8 +3,6 @@
 namespace App\DataFixtures;
 
 
-
-use App\Entity\FruitsMix;
 use App\Factory\FruitsMixFactory;
 use  Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
