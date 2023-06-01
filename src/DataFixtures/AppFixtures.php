@@ -13,6 +13,6 @@ class AppFixtures extends Fixture
 {
     public function load(ObjectManager $manager): void
     {
-        FruitsMixFactory::createMany(16);
+        FruitsMixFactory::createMany(60);
     }
 }
